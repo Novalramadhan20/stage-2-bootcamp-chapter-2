@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add My Project</title>
+    <!-- untuk memuat css bootstrap-->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+        crossorigin="anonymous">
+    <link 
+        rel="stylesheet" 
+        href="/public/style.css">
+</head>
+<body>
+    <!-- NavBar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+          <a class="navbar-brand me-2" href="#">
+              <img src="/public/asset/logo.png"></a>
+          <button 
+            class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarSupportedContent" 
+            aria-controls="navbarSupportedContent" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 ms-1 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active ms-3" 
+                    aria-current="page" 
+                    href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                {{#if this.isLogin}}
+                  <a class="nav-link active text-black ms-3" 
+                      aria-current="page" 
+                      href="/addProject">Add Project
+                  </a>
+                {{/if}}  
+              </li>
+            </ul>
+            <div class="d-flex">
+              {{#if this.isLogin}}
+                <a class="nav-link active me-auto text-black" 
+                    aria-current="page" 
+                    href="/">{{user.name}}</a>
+                <a class="nav-link active me-auto" 
+                    aria-current="page" 
+                    href="/logout">logout</a>
+                {{else}}
+                <a class="nav-link active me-auto" 
+                    aria-current="page" 
+                    href="/register">Register</a>
+                <a class="nav-link active me-auto" 
+                    aria-current="page" 
+                    href="/login">Login</a>
+                {{/if}}  
+                <a class="btn btn-dark" id="btncontact" href="/contact">Contact me</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    <!-- Navbar akhir -->  
+    <!--Add My Project-->
+        <div class="container-form-blog d-flex justify-content-center">
+            <form action="addProject" method="POST" enctype='multipart/form-data'>
+                <div class="h3 text-center mb-4 mt-5 text-black">ADD MY PROJECT</div>
+                <div class="mb-3">
+                    <label for="input-title" class="form-label text-black">Project Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="project-name"
+                        name="project_name"
+                    />
+                </div>    
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="input-start-date" class="form-label text-black">Start Date</label>
+                        <input 
+                            type="date" 
+                            class="form-control" 
+                            id="start-date"
+                            name="startdate"
+                        />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="input-end-date" class="form-label text-black">End Date</label>
+                        <input 
+                            type="date" 
+                            class="form-control" 
+                            id="end-date"
+                            name="enddate"
+                        />
+                    </div>
+                    <div class="mb-3">
+                        <label for="input-description" class="form-label text-black">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="5"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="input-technologies" class="form-label text-black">Technologies</label>
+                        <div class="d-flex flex-wrap col col-md-7 mt-3">
+                          <div class="form-check form-check-inline flex-fill mb-3">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="nodejs" value="true">
+                            <label class="form-check-label" for="flexCheckDefault">Node Js</label>
+                          </div>
+                          <div class="form-check form-check-inline me-4">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="nextjs" value="true">
+                            <label class="form-check-label" for="flexCheckDefault">Next Js</label>
+                          </div>
+                          <div class="form-check form-check-inline flex-fill">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="reactjs" value="true">
+                            <label class="form-check-label" for="flexCheckDefault">React Js</label>
+                          </div>
+                          <div class="form-check form-check-inline me-1">
+                            <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="typescript" value="true">
+                            <label class="form-check-label" for="flexCheckDefault">TypeScript</label>
+                          </div>
+                          <div class="mt-3">
+                            <label for="input-technologies" class="form-label text-black">Upload Image</label>
+                            <div class="upload-image">
+                              <label for="input-project-image">
+                              <p>
+                              <input 
+                                type="file" 
+                                id="input-project-image" 
+                                name="image" 
+                                hidden
+                                required
+                                value="upload" >Choose
+                              </p>
+                              <img src="/public/asset/file.png" alt="file">
+                              </label>
+                          </div>    
+                          </div>
+                        </div>
+                    </div>
+                </div>        
+                <div class="col-md-12">
+                  <div class="btn-post" type="button" onclick="">
+                    <button id="btnsubmit">Submit</button>
+                  </div>
+                </div>      
+            </form>    
+        </div>    
+    <script 
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+    crossorigin="anonymous">
+    </script>
+</body>
+</html>
